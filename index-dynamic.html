@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title id="pageTitle">Wana Trading - Showcase</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- tsParticles -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.0.3/tsparticles.bundle.min.js"></script>
+
+  <style>
+    /* ===== GLOBAL STYLES ===== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      height: 100%;
+      transition: background-color 1s ease;
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      padding-top: 0;
+    }
+
+    /* ===== LOADING ANIMATION ===== */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+    
+    .loading-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .loading-logo {
+      width: 80px;
+      height: 80px;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ===== NAVIGATION ===== */
+    .navbar {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.98) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      position: fixed;
+      top: -100px;
+      width: 100%;
+      z-index: 1000;
+      height: 80px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .navbar.show {
+      top: 0;
+    }
+    
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(25px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #fff !important;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .navbar.scrolled .navbar-brand {
+      color: #333 !important;
+      text-shadow: none;
+    }
+    
+    .nav-link {
+      color: rgba(255, 255, 255, 0.95) !important;
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin: 0 15px;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    
+    .navbar.scrolled .nav-link {
+      color: #333 !important;
+      text-shadow: none;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ffd700, #ffed4e);
+      border-radius: 2px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-50%);
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .nav-link:hover {
+      color: #ffd700 !important;
+      transform: translateY(-2px);
+    }
+    
+    .navbar.scrolled .nav-link:hover {
+      color: #ffd700 !important;
+    }
+
+    /* ===== HERO SECTION ===== */
+    #tsparticles {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      z-index: -3;
+    }
+    
+    .polygon-container {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: -2;
+      overflow: hidden;
+    }
+    
+    .polygon {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.05);
+      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+      animation: floatAnim 20s infinite ease-in-out alternate;
+    }
+    
+    @keyframes floatAnim {
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      100% { transform: translateY(-50px) rotate(360deg) scale(1.2); }
+    }
+    
+    .polygon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+    .polygon:nth-child(2) { top: 60%; left: 20%; animation-delay: 2s; }
+    .polygon:nth-child(3) { top: 40%; left: 70%; animation-delay: 4s; }
+    .polygon:nth-child(4) { top: 80%; left: 80%; animation-delay: 1s; }
+    .polygon:nth-child(5) { top: 10%; left: 80%; animation-delay: 3s; }
+
+    /* ===== CAROUSEL STYLES ===== */
+    .slider_section,
+    .carousel-item {
+      height: 100vh !important;
+      position: relative;
+      margin-top: 0;
+    }
+    
+    .carousel-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+      z-index: -1;
+    }
+
+    .carousel-item > .container,
+    .carousel-item > .container > .row {
+      height: 100%;
+      padding-top: 0;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      opacity: 0.2;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      opacity: 0.8;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    /* ===== SLIDER CONTENT ===== */
+    .slider_item-detail {
+      color: #fff;
+      position: relative;
+      z-index: 2;
+    }
+
+    .slider_item-detail h1,
+    .slider_item-detail p,
+    .slider_item-detail a {
+      color: #fff;
+    }
+
+    .slider_item-detail h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, #ffd700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glow 2.5s ease-in-out infinite alternate;
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    }
+    
+    @keyframes glow {
+      from { 
+        text-shadow: 0 0 20px rgba(255,255,255,0.7);
+        filter: brightness(1);
+      }
+      to { 
+        text-shadow: 0 0 40px rgba(255,255,255,1), 0 0 60px rgba(255, 215, 0, 0.5);
+        filter: brightness(1.1);
+      }
+    }
+
+    .slider_item-detail p {
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    .slider_img-box {
+      position: relative;
+      z-index: 2;
+    }
+
+    .slider_img-box img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: floatImage 6s ease-in-out infinite alternate;
+      transition: all 0.3s ease;
+    }
+    
+    .slider_img-box img:hover {
+      transform: scale(1.05) translateY(-10px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    }
+    
+    @keyframes floatImage {
+      from { transform: translateY(0); }
+      to { transform: translateY(-15px); }
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      border-radius: 50px;
+      padding: 15px 35px;
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: none;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .btn-warning {
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      color: #333;
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+    }
+
+    /* ===== PRODUCTS SECTION ===== */
+    .product-card {
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+
+    .card-img-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-img-top {
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-card:hover .card-img-top {
+      transform: scale(1.1);
+    }
+
+    .product-card:hover .card-overlay {
+      opacity: 1;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: #fff;
+      padding: 60px 0 20px;
+    }
+
+    .footer-section h5 {
+      color: #ffd700;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section ul li a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section ul li a:hover {
+      color: #ffd700;
+    }
+
+    .contact-info p {
+      margin-bottom: 10px;
+      color: #ccc;
+    }
+
+    .contact-info i {
+      color: #ffd700;
+      margin-right: 10px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .slider_item-detail h1 {
+        font-size: 2rem;
+      }
+      
+      .slider_item-detail p {
+        font-size: 0.9rem;
+      }
+      
+      .btn {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ===== SCROLL TO TOP ===== */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .scroll-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <img src="images/wana_trader.png" alt="Loading..." class="loading-logo">
+  </div>
+
+  <!-- Particles Background -->
+  <div id="tsparticles"></div>
+
+  <!-- Floating Polygons -->
+  <div class="polygon-container">
+    <div class="polygon"></div>
+    <div class="polygon"></div>
+    <div class="polygon"></div>
+    <div class="polygon"></div>
+    <div class="polygon"></div>
+  </div>
+
+  <!-- Dynamic Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="#" id="navbarBrand">
+        <!-- Dynamic brand content will be injected here -->
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto" id="navbarNav">
+          <!-- Dynamic navigation links will be injected here -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dynamic Hero Slider -->
+  <section class="slider_section">
+    <div id="heroCarousel" class="carousel slide w-100" data-ride="carousel" data-interval="7000" data-pause="false">
+      <div class="carousel-inner h-100" id="carouselInner">
+        <!-- Dynamic carousel slides will be injected here -->
+      </div>
+      
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Dynamic Products Section -->
+  <section id="products" class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h2 class="display-4 font-weight-bold" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            Our Products
+          </h2>
+          <p class="lead text-muted">Discover our amazing collection of gadgets and services</p>
+        </div>
+      </div>
+      <div class="row" id="productsRow">
+        <!-- Dynamic products will be injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Dynamic Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="footer-section">
+            <div class="d-flex align-items-center mb-3">
+              <!-- Dynamic company logo and name will be injected here -->
+            </div>
+            <p class="text-muted" id="companyTagline">
+              <!-- Dynamic company tagline will be injected here -->
+            </p>
+          </div>
+        </div>
+        
+        <div class="col-lg-2 mb-4">
+          <div class="footer-section">
+            <h5>Quick Links</h5>
+            <ul id="footerQuickLinks">
+              <!-- Dynamic quick links will be injected here -->
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 mb-4">
+          <div class="footer-section">
+            <h5>Our Services</h5>
+            <ul id="footerServices">
+              <!-- Dynamic services will be injected here -->
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 mb-4">
+          <div class="footer-section">
+            <h5>Contact Info</h5>
+            <div class="contact-info" id="footerContactInfo">
+              <!-- Dynamic contact info will be injected here -->
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <hr class="my-4" style="border-color: #444;">
+      
+      <div class="row">
+        <div class="col-md-6">
+          <p class="mb-0 text-muted" id="copyrightText">
+            <!-- Dynamic copyright text will be injected here -->
+          </p>
+        </div>
+        <div class="col-md-6 text-md-right">
+          <p class="mb-0 text-muted" id="designerText">
+            <!-- Dynamic designer text will be injected here -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/content-loader.js"></script>
+
+  <script>
+    // ===== LOADING SCREEN =====
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        document.getElementById('loadingScreen').classList.add('fade-out');
+        setTimeout(() => {
+          document.getElementById('loadingScreen').style.display = 'none';
+        }, 500);
+      }, 1500);
+    });
+
+    // ===== NAVIGATION SCROLL EFFECT =====
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('mainNavbar');
+      const heroSection = document.querySelector('.slider_section');
+      
+      if (heroSection) {
+        const heroHeight = heroSection.offsetHeight;
+        
+        if (window.scrollY >= heroHeight - 100) {
+          navbar.classList.add('show');
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('show');
+          navbar.classList.remove('scrolled');
+        }
+      }
+    });
+
+    // ===== SMOOTH SCROLLING =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // ===== CAROUSEL ANIMATIONS =====
+    function animateSlide($slide) {
+      const tl = gsap.timeline();
+      tl.fromTo($slide.find('h1'), { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "back.out(1.7)" });
+      tl.fromTo($slide.find('p'), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "-=0.5");
+      tl.fromTo($slide.find('.btn'), { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, "-=0.4");
+    }
+
+    function updateBg($slide) {
+      const color = $slide.data('bgcolor');
+      gsap.to('body', { backgroundColor: color, duration: 1.2, ease: "power2.inOut" });
+    }
+
+    // ===== PARTICLES =====
+    tsParticles.load("tsparticles", {
+      particles: {
+        number: { value: 35 },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2 },
+        size: { value: 3 },
+        move: { enable: true, speed: 1 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: false },
+          onclick: { enable: false }
+        }
+      },
+      detectRetina: true
+    });
+
+    // ===== FLOATING IMAGES EFFECT =====
+    gsap.to(".slider_img-box img", {
+      y: 10,
+      repeat: -1,
+      yoyo: true,
+      duration: 3,
+      ease: "sine.inOut"
+    });
+
+    // ===== PERIODIC BACKGROUND COLOR CHANGES =====
+    const colors = ["#111827", "#1e3a8a", "#047857", "#7c3aed", "#be185d"];
+    let colorIndex = 0;
+    setInterval(() => {
+      colorIndex = (colorIndex + 1) % colors.length;
+      gsap.to("body", { backgroundColor: colors[colorIndex], duration: 2 });
+    }, 10000);
+
+    // ===== PRODUCT CARDS HOVER EFFECTS =====
+    document.addEventListener('mouseover', function(e) {
+      if (e.target.closest('.product-card')) {
+        const card = e.target.closest('.product-card');
+        const img = card.querySelector('img');
+        const overlay = card.querySelector('.card-overlay');
+        if (img) gsap.to(img, { scale: 1.1, duration: 0.3 });
+        if (overlay) gsap.to(overlay, { opacity: 1, duration: 0.3 });
+        gsap.to(card, { y: -10, duration: 0.3 });
+      }
+    });
+
+    document.addEventListener('mouseout', function(e) {
+      if (e.target.closest('.product-card')) {
+        const card = e.target.closest('.product-card');
+        const img = card.querySelector('img');
+        const overlay = card.querySelector('.card-overlay');
+        if (img) gsap.to(img, { scale: 1, duration: 0.3 });
+        if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.3 });
+        gsap.to(card, { y: 0, duration: 0.3 });
+      }
+    });
+
+    // ===== SCROLL TO TOP BUTTON =====
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.innerHTML = '↑';
+    scrollToTopBtn.className = 'scroll-to-top';
+    document.body.appendChild(scrollToTopBtn);
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        scrollToTopBtn.style.opacity = '1';
+        scrollToTopBtn.style.visibility = 'visible';
+      } else {
+        scrollToTopBtn.style.opacity = '0';
+        scrollToTopBtn.style.visibility = 'hidden';
+      }
+    });
+
+    // ===== CAROUSEL INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait for content to be loaded, then initialize carousel
+      setTimeout(() => {
+        if (typeof $ !== 'undefined' && $.fn.carousel) {
+          $('#heroCarousel').carousel({
+            interval: 7000,
+            pause: false
+          });
+
+          // Initialize first slide animations
+          const $firstSlide = $('.carousel-item.active');
+          if ($firstSlide.length) {
+            animateSlide($firstSlide);
+            updateBg($firstSlide);
+          }
+
+          // Handle slide changes
+          $('#heroCarousel').on('slid.bs.carousel', (e) => {
+            const $current = $(e.relatedTarget);
+            animateSlide($current);
+            updateBg($current);
+          });
+        }
+      }, 2000); // Wait for content loader to finish
+    });
+  </script>
+</body>
+</html> 

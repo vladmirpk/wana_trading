@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Products - Wana Trading</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <style>
+    /* ===== GLOBAL STYLES ===== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* ===== NAVIGATION ===== */
+    .navbar {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.98) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      height: 80px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #333 !important;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .nav-link {
+      color: #333 !important;
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin: 0 15px;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ffd700, #ffed4e);
+      border-radius: 2px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-50%);
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .nav-link:hover {
+      color: #ffd700 !important;
+      transform: translateY(-2px);
+    }
+    
+    /* Navbar toggler for mobile */
+    .navbar-toggler {
+      border: none;
+      padding: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-toggler:focus {
+      outline: none;
+      box-shadow: none;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(51, 51, 51, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      transition: all 0.3s ease;
+    }
+    
+    /* Mobile menu styling */
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 15px;
+        margin-top: 1rem;
+        padding: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      
+      .nav-link {
+        padding: 0.75rem 1rem;
+        margin: 0.25rem 0;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-link:hover {
+        background: rgba(255, 215, 0, 0.1);
+        transform: translateX(5px);
+      }
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="header-grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23header-grain)"/></svg>');
+      opacity: 0.3;
+    }
+    
+    .page-header h1 {
+      color: #fff;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .page-header p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      margin-bottom: 0;
+    }
+
+    /* ===== PRODUCTS SECTION ===== */
+    #products {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      position: relative;
+    }
+    
+    #products::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.5;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .product-card {
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      height: 100%;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+    
+    .card-img-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card-img-wrapper img {
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .product-card:hover .card-img-wrapper img {
+      transform: scale(1.1);
+    }
+    
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .product-card:hover .card-overlay {
+      opacity: 1;
+    }
+    
+    .card-body {
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    
+    .card-text {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.4rem 0.8rem;
+      font-weight: 600;
+    }
+
+    /* ===== FILTER BUTTONS ===== */
+    .filter-buttons {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .filter-btn {
+      background: transparent;
+      border: 2px solid #667eea;
+      color: #667eea;
+      padding: 10px 20px;
+      margin: 0 5px;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border-color: #667eea;
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .page-header p {
+        font-size: 1rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .filter-btn {
+        margin: 5px;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/wana_trader.png" alt="Wana Trading" height="40" class="d-inline-block align-top mr-2">
+        Wana Trading
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container position-relative">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1>Our Products</h1>
+          <p>Discover our premium collection of gadgets and services</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products">
+    <div class="container position-relative">
+      <!-- Filter Buttons -->
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All Products</button>
+        <button class="filter-btn" data-filter="mobile">Mobile</button>
+        <button class="filter-btn" data-filter="audio">Audio</button>
+        <button class="filter-btn" data-filter="service">Services</button>
+        <button class="filter-btn" data-filter="accessory">Accessories</button>
+      </div>
+
+      <div class="row" id="productsGrid">
+        <!-- Mobile Products -->
+        <div class="col-lg-4 col-md-6 mb-4" data-category="mobile">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/iphones.jpg" class="card-img-top" alt="Apple iPhones">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Apple iPhones</h5>
+              <p class="card-text">Capture moments. Elevate your style. Experience Apple's magic.</p>
+              <span class="badge badge-info" style="background: linear-gradient(135deg, #17a2b8, #6f42c1); color: white;">Mobile</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4" data-category="mobile">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/a_lot_of_phones.jpg" class="card-img-top" alt="Smartphones">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Smartphones</h5>
+              <p class="card-text">Find your perfect match from a sea of choices.</p>
+              <span class="badge badge-danger" style="background: linear-gradient(135deg, #dc3545, #fd7e14); color: white;">Hot</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4" data-category="mobile">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/tablets.jpg" class="card-img-top" alt="Tablets">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Tablets</h5>
+              <p class="card-text">From work to play, unlock endless possibilities with our tablets.</p>
+              <span class="badge badge-secondary" style="background: linear-gradient(135deg, #6c757d, #495057); color: white;">Tablet</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audio Products -->
+        <div class="col-lg-4 col-md-6 mb-4" data-category="audio">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/headphone.jpg" class="card-img-top" alt="Premium Headphones">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Premium Headphones</h5>
+              <p class="card-text">Feel every beat. Headphones that make your soul dance.</p>
+              <span class="badge badge-primary" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">Audio</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4" data-category="audio">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/airpods_pro.jpg" class="card-img-top" alt="AirPods Pro">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">AirPods Pro</h5>
+              <p class="card-text">Silence the noise. Hear every detail. Next-level listening.</p>
+              <span class="badge badge-warning" style="background: linear-gradient(135deg, #ffd700, #ffed4e); color: #333;">Premium</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4" data-category="audio">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/airpods.jpg" class="card-img-top" alt="Original AirPods">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Original AirPods</h5>
+              <p class="card-text">Simple. Iconic. Wire-free freedom at its finest.</p>
+              <span class="badge badge-primary" style="background: linear-gradient(135deg, #007bff, #0056b3); color: white;">Classic</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4" data-category="audio">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/apple_headphones.jpg" class="card-img-top" alt="Apple Headphones">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Apple Headphones</h5>
+              <p class="card-text">Experience every detail in stunning clarity. Designed for true audiophiles.</p>
+              <span class="badge badge-info" style="background: linear-gradient(135deg, #17a2b8, #6f42c1); color: white;">Audio</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accessories -->
+        <div class="col-lg-4 col-md-6 mb-4" data-category="accessory">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/smart_watches.jpg" class="card-img-top" alt="Smart Watches">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Smart Watches</h5>
+              <p class="card-text">Style meets function. Your life, at a glance — on your wrist.</p>
+              <span class="badge badge-success" style="background: linear-gradient(135deg, #28a745, #20c997); color: white;">Wearable</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="col-lg-4 col-md-6 mb-4" data-category="service">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/wifi.jpg" class="card-img-top" alt="WiFi & Connectivity">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">WiFi & Connectivity</h5>
+              <p class="card-text">High-speed WiFi and top-tier connectivity services for your lifestyle.</p>
+              <span class="badge badge-success" style="background: linear-gradient(135deg, #28a745, #20c997); color: white;">Service</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4" data-category="service">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/printing.jpg" class="card-img-top" alt="Printing Services">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Printing Services</h5>
+              <p class="card-text">High-quality prints for all your professional and personal needs.</p>
+              <span class="badge badge-secondary" style="background: linear-gradient(135deg, #6c757d, #495057); color: white;">Service</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4" data-category="service">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/binding.jpg" class="card-img-top" alt="Perfect Binding">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Perfect Binding</h5>
+              <p class="card-text">Neat, professional binding for documents that make a statement.</p>
+              <span class="badge badge-warning" style="background: linear-gradient(135deg, #ffd700, #ffed4e); color: #333;">Professional</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4" data-category="service">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/laminating.jpg" class="card-img-top" alt="Laminating">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Laminating</h5>
+              <p class="card-text">Protect and enhance your documents with a sleek, glossy finish.</p>
+              <span class="badge badge-primary" style="background: linear-gradient(135deg, #007bff, #0056b3); color: white;">Protection</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4" data-category="service">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/omari.png" class="card-img-top" alt="Omari Agent Services">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Omari Agent Services</h5>
+              <p class="card-text">Send and receive money with confidence — fast, safe, and easy.</p>
+              <span class="badge badge-success" style="background: linear-gradient(135deg, #28a745, #20c997); color: white;">Financial</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4" data-category="service">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/visa1.jpg" class="card-img-top" alt="Visa Assistance">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Visa Application Assistance</h5>
+              <p class="card-text">Travel dreams made easy. We help you every step of the way.</p>
+              <span class="badge badge-info" style="background: linear-gradient(135deg, #17a2b8, #6f42c1); color: white;">Travel</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4" data-category="service">
+          <div class="card product-card">
+            <div class="card-img-wrapper">
+              <img src="images/ecocash.png" class="card-img-top" alt="Ecocash Agent">
+              <div class="card-overlay">
+                <a href="#" class="btn btn-light btn-sm">Learn More</a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Ecocash Agent</h5>
+              <p class="card-text">Instant cash-in, cash-out, bill payments, and more at your convenience.</p>
+              <span class="badge badge-success" style="background: linear-gradient(135deg, #28a745, #20c997); color: white;">Mobile Money</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); position: relative; overflow: hidden;">
+    <!-- Background Pattern -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;><defs><pattern id=&quot;footer-grain&quot; width=&quot;100&quot; height=&quot;100&quot; patternUnits=&quot;userSpaceOnUse&quot;><circle cx=&quot;25&quot; cy=&quot;25&quot; r=&quot;0.5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;0.05&quot;/><circle cx=&quot;75&quot; cy=&quot;75&quot; r=&quot;0.5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;0.05&quot;/><circle cx=&quot;50&quot; cy=&quot;10&quot; r=&quot;0.3&quot; fill=&quot;%23ffffff&quot; opacity=&quot;0.05&quot;/><circle cx=&quot;10&quot; cy=&quot;60&quot; r=&quot;0.3&quot; fill=&quot;%23ffffff&quot; opacity=&quot;0.05&quot;/><circle cx=&quot;90&quot; cy=&quot;40&quot; r=&quot;0.3&quot; fill=&quot;%23ffffff&quot; opacity=&quot;0.05&quot;/></pattern></defs><rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(%23footer-grain)&quot;/></svg>'); opacity: 0.3;"></div>
+    
+    <div class="container position-relative">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-3">
+          <div class="d-flex align-items-center mb-2">
+            <img src="images/wana_trader.png" alt="Wana Trading" height="40" class="mr-2">
+            <h6 class="mb-0 font-weight-bold" style="background: linear-gradient(135deg, #ffd700, #ffed4e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.1rem;">Wana Trading</h6>
+          </div>
+          <p class="text-muted mb-3" style="font-size: 0.85rem; line-height: 1.4;">Your one-stop destination for premium gadgets and innovative services. We bring technology and convenience together.</p>
+          <div class="social-links">
+            <a href="#" class="btn btn-outline-light btn-sm mr-2" style="border-radius: 50%; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.3s ease;">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="btn btn-outline-light btn-sm mr-2" style="border-radius: 50%; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.3s ease;">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="btn btn-outline-light btn-sm mr-2" style="border-radius: 50%; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.3s ease;">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="btn btn-outline-light btn-sm" style="border-radius: 50%; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.3s ease;">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="col-lg-2 col-md-6 mb-3">
+          <h6 class="font-weight-bold mb-2" style="color: #ffd700; font-size: 0.9rem;">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li class="mb-1"><a href="index.html" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Home</a></li>
+            <li class="mb-1"><a href="products.html" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Products</a></li>
+            <li class="mb-1"><a href="about.html" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">About Us</a></li>
+            <li class="mb-1"><a href="services.html" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Services</a></li>
+            <li class="mb-1"><a href="contact.html" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+          <h6 class="font-weight-bold mb-2" style="color: #ffd700; font-size: 0.9rem;">Our Services</h6>
+          <ul class="list-unstyled">
+            <li class="mb-1"><a href="#" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Mobile Phones</a></li>
+            <li class="mb-1"><a href="#" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Audio Equipment</a></li>
+            <li class="mb-1"><a href="#" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Printing Services</a></li>
+            <li class="mb-1"><a href="#" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Financial Services</a></li>
+            <li class="mb-1"><a href="#" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Visa Assistance</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+          <h6 class="font-weight-bold mb-2" style="color: #ffd700; font-size: 0.9rem;">Newsletter</h6>
+          <p class="text-muted mb-2" style="font-size: 0.8rem;">Stay updated with our latest products and offers.</p>
+          <form class="mb-2">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Your email" style="border-radius: 20px 0 0 20px; border: none; font-size: 0.8rem; padding: 8px 12px;">
+              <div class="input-group-append">
+                <button class="btn btn-warning" type="submit" style="border-radius: 0 20px 20px 0; background: linear-gradient(135deg, #ffd700, #ffed4e); border: none; color: #333; font-size: 0.8rem; padding: 8px 12px;">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="contact-info">
+            <p class="mb-1 text-muted" style="font-size: 0.8rem;"><i class="fas fa-phone mr-2" style="color: #ffd700; font-size: 0.7rem;"></i>+263 782 712 390</p>
+            <p class="mb-1 text-muted" style="font-size: 0.8rem;"><i class="fas fa-phone mr-2" style="color: #ffd700; font-size: 0.7rem;"></i>+263 786 607 329</p>
+            <p class="mb-1 text-muted" style="font-size: 0.8rem;"><i class="fas fa-envelope mr-2" style="color: #ffd700; font-size: 0.7rem;"></i>info@wanatrading.com</p>
+            <p class="mb-0 text-muted" style="font-size: 0.8rem;"><i class="fas fa-map-marker-alt mr-2" style="color: #ffd700; font-size: 0.7rem;"></i>Shop 19, Eastgate Mall, Harare</p>
+          </div>
+        </div>
+      </div>
+      
+      <hr class="my-3" style="border-color: #444;">
+      
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="mb-0 text-muted" style="font-size: 0.75rem;">&copy; 2024 Wana Trading. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-md-right">
+          <p class="mb-0 text-muted" style="font-size: 0.75rem;">Designed with <i class="fas fa-heart" style="color: #ffd700;"></i> for excellence</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ===== PRODUCT FILTERING =====
+    document.querySelectorAll('.filter-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        this.classList.add('active');
+        
+        const filter = this.getAttribute('data-filter');
+        const products = document.querySelectorAll('[data-category]');
+        
+        products.forEach(product => {
+          if (filter === 'all' || product.getAttribute('data-category') === filter) {
+            product.style.display = 'block';
+            gsap.fromTo(product, 
+              { y: 50, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }
+            );
+          } else {
+            product.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // ===== PRODUCT CARDS HOVER EFFECTS =====
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        gsap.to(this, { y: -10, duration: 0.3 });
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        gsap.to(this, { y: 0, duration: 0.3 });
+      });
+    });
+
+    // ===== ANIMATE PRODUCT CARDS ON SCROLL =====
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          gsap.fromTo(entry.target, 
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }
+          );
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.product-card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // ===== SCROLL TO TOP BUTTON =====
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.innerHTML = '↑';
+    scrollToTopBtn.className = 'scroll-to-top';
+    scrollToTopBtn.style.cssText = `
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    `;
+    document.body.appendChild(scrollToTopBtn);
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        scrollToTopBtn.style.opacity = '1';
+        scrollToTopBtn.style.visibility = 'visible';
+      } else {
+        scrollToTopBtn.style.opacity = '0';
+        scrollToTopBtn.style.visibility = 'hidden';
+      }
+    });
+  </script>
+</body>
+</html> 

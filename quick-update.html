@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wana Trading - Quick Updates</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+        }
+        .form-control {
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            padding: 15px;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .update-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        .success-message {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <!-- Header -->
+        <div class="header text-center text-white">
+            <img src="images/wana_trader.png" alt="Wana Trading" height="60" class="mb-3">
+            <h2>Quick Content Updates</h2>
+            <p class="mb-0">Make changes to your website in seconds!</p>
+        </div>
+
+        <!-- Quick Contact Update -->
+        <div class="update-section">
+            <h4><i class="fas fa-phone me-2 text-primary"></i>Update Contact Information</h4>
+            <form id="contactForm">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label">Phone Number 1</label>
+                        <input type="tel" class="form-control" id="phone1" placeholder="+263 782 712 390">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Phone Number 2</label>
+                        <input type="tel" class="form-control" id="phone2" placeholder="+263 786 607 329">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="info@wanatrading.com">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <label class="form-label">Business Address</label>
+                        <input type="text" class="form-control" id="address" placeholder="Shop 19, Eastgate Mall, Harare">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">
+                    <i class="fas fa-save me-2"></i>Update Contact Info
+                </button>
+            </form>
+            <div class="success-message" id="contactSuccess">
+                ✅ Contact information updated! Download the file and replace data/site-config.json
+            </div>
+        </div>
+
+        <!-- Quick Product Add -->
+        <div class="update-section">
+            <h4><i class="fas fa-plus me-2 text-success"></i>Add New Product</h4>
+            <form id="productForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="productName" placeholder="e.g., New Smartphone">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Category</label>
+                        <select class="form-control" id="productCategory">
+                            <option value="Mobile">Mobile</option>
+                            <option value="Audio">Audio</option>
+                            <option value="Service">Service</option>
+                            <option value="Tablet">Tablet</option>
+                            <option value="Hot">Hot</option>
+                            <option value="Premium">Premium</option>
+                            <option value="Classic">Classic</option>
+                            <option value="Wearable">Wearable</option>
+                            <option value="Professional">Professional</option>
+                            <option value="Protection">Protection</option>
+                            <option value="Financial">Financial</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Mobile Money">Mobile Money</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="productDescription" rows="3" placeholder="Describe your product..."></textarea>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Image Path</label>
+                        <input type="text" class="form-control" id="productImage" placeholder="images/new_product.jpg">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Badge Color</label>
+                        <select class="form-control" id="productBadgeColor">
+                            <option value="primary">Blue (Primary)</option>
+                            <option value="success">Green (Success)</option>
+                            <option value="info">Cyan (Info)</option>
+                            <option value="warning">Yellow (Warning)</option>
+                            <option value="danger">Red (Danger)</option>
+                            <option value="secondary">Gray (Secondary)</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success mt-3">
+                    <i class="fas fa-plus me-2"></i>Add Product
+                </button>
+            </form>
+            <div class="success-message" id="productSuccess">
+                ✅ Product added! Download the file and replace data/products.json
+            </div>
+        </div>
+
+        <!-- Quick Slide Add -->
+        <div class="update-section">
+            <h4><i class="fas fa-images me-2 text-warning"></i>Add New Carousel Slide</h4>
+            <form id="slideForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label">Slide Title</label>
+                        <input type="text" class="form-control" id="slideTitle" placeholder="e.g., New Service Launch">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Button Text</label>
+                        <input type="text" class="form-control" id="slideButtonText" placeholder="e.g., Learn More">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="slideDescription" rows="3" placeholder="Describe your slide..."></textarea>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Image Path</label>
+                        <input type="text" class="form-control" id="slideImage" placeholder="images/new_slide.jpg">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Background Color</label>
+                        <input type="color" class="form-control" id="slideBackgroundColor" value="#111827">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Layout</label>
+                        <select class="form-control" id="slideLayout">
+                            <option value="left">Text Left, Image Right</option>
+                            <option value="right">Image Left, Text Right</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-warning mt-3">
+                    <i class="fas fa-plus me-2"></i>Add Slide
+                </button>
+            </form>
+            <div class="success-message" id="slideSuccess">
+                ✅ Slide added! Download the file and replace data/carousel-slides.json
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="update-section">
+            <h4><i class="fas fa-download me-2 text-info"></i>Download Updated Files</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <button class="btn btn-outline-primary w-100" onclick="downloadSiteConfig()">
+                        <i class="fas fa-download me-2"></i>Site Config
+                    </button>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-outline-success w-100" onclick="downloadProducts()">
+                        <i class="fas fa-download me-2"></i>Products
+                    </button>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-outline-warning w-100" onclick="downloadCarousel()">
+                        <i class="fas fa-download me-2"></i>Carousel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="text-center mt-4">
+            <a href="admin.html" class="btn btn-light me-3">
+                <i class="fas fa-cog me-2"></i>Full Admin Panel
+            </a>
+            <a href="index.html" class="btn btn-light">
+                <i class="fas fa-home me-2"></i>View Website
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Embedded data (no server required!)
+        const siteConfig = {
+  "company": {
+    "name": "Wana Trading",
+    "tagline": "Your one-stop destination for premium gadgets and innovative services. We bring technology and convenience together.",
+    "logo": "images/wana_trader.png",
+    "logoAlt": "Wana Trading"
+  },
+  "contact": {
+    "phones": [
+      "+263 782 712 390",
+      "+263 786 607 329"
+    ],
+    "email": "info@wanatrading.com",
+    "address": "Shop 19, Eastgate Mall, Harare"
+  },
+  "social": {
+    "facebook": "#",
+    "twitter": "#",
+    "instagram": "#",
+    "whatsapp": "#"
+  },
+  "navigation": [
+    {
+      "text": "Home",
+      "link": "#heroCarousel"
+    },
+    {
+      "text": "Products",
+      "link": "products.html"
+    },
+    {
+      "text": "About",
+      "link": "about.html"
+    },
+    {
+      "text": "Services",
+      "link": "services.html"
+    },
+    {
+      "text": "Contact",
+      "link": "contact.html"
+    }
+  ],
+  "footer": {
+    "quickLinks": [
+      {
+        "text": "Home",
+        "link": "#heroCarousel"
+      },
+      {
+        "text": "Products",
+        "link": "products.html"
+      },
+      {
+        "text": "About Us",
+        "link": "about.html"
+      },
+      {
+        "text": "Services",
+        "link": "services.html"
+      },
+      {
+        "text": "Contact",
+        "link": "contact.html"
+      }
+    ],
+    "services": [
+      {
+        "text": "Mobile Phones",
+        "link": "#"
+      },
+      {
+        "text": "Audio Equipment",
+        "link": "#"
+      },
+      {
+        "text": "Printing Services",
+        "link": "#"
+      },
+      {
+        "text": "Financial Services",
+        "link": "#"
+      },
+      {
+        "text": "Visa Assistance",
+        "link": "#"
+      }
+    ],
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Stay updated with our latest products and offers.",
+      "placeholder": "Your email"
+    }
+  },
+  "copyright": {
+    "text": "© 2024 Wana Trading. All rights reserved.",
+    "designer": "Designed with ❤️ for excellence"
+  }
+};
+
+        const products = [
+    {
+      "id": 1,
+      "title": "Premium Headphones",
+      "description": "Feel every beat. Headphones that make your soul dance.",
+      "image": "images/headphone.jpg",
+      "imageAlt": "Premium Headphones",
+      "category": "Audio",
+      "badgeColor": "primary",
+      "badgeGradient": "linear-gradient(135deg, #667eea, #764ba2)"
+    },
+    {
+      "id": 2,
+      "title": "WiFi & Connectivity",
+      "description": "High-speed WiFi and top-tier connectivity services for your lifestyle.",
+      "image": "images/wifi.jpg",
+      "imageAlt": "WiFi & Connectivity",
+      "category": "Service",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    },
+    {
+      "id": 3,
+      "title": "Apple iPhones",
+      "description": "Capture moments. Elevate your style. Experience Apple's magic.",
+      "image": "images/iphones.jpg",
+      "imageAlt": "Apple iPhones",
+      "category": "Mobile",
+      "badgeColor": "info",
+      "badgeGradient": "linear-gradient(135deg, #17a2b8, #6f42c1)"
+    },
+    {
+      "id": 4,
+      "title": "Tablets",
+      "description": "From work to play, unlock endless possibilities with our tablets.",
+      "image": "images/tablets.jpg",
+      "imageAlt": "Tablets",
+      "category": "Tablet",
+      "badgeColor": "secondary",
+      "badgeGradient": "linear-gradient(135deg, #6c757d, #495057)"
+    },
+    {
+      "id": 5,
+      "title": "Smartphones",
+      "description": "Find your perfect match from a sea of choices.",
+      "image": "images/a_lot_of_phones.jpg",
+      "imageAlt": "Smartphones",
+      "category": "Hot",
+      "badgeColor": "danger",
+      "badgeGradient": "linear-gradient(135deg, #dc3545, #fd7e14)"
+    },
+    {
+      "id": 6,
+      "title": "AirPods Pro",
+      "description": "Silence the noise. Hear every detail. Next-level listening.",
+      "image": "images/airpods_pro.jpg",
+      "imageAlt": "AirPods Pro",
+      "category": "Premium",
+      "badgeColor": "warning",
+      "badgeGradient": "linear-gradient(135deg, #ffd700, #ffed4e)"
+    },
+    {
+      "id": 7,
+      "title": "Original AirPods",
+      "description": "Simple. Iconic. Wire-free freedom at its finest.",
+      "image": "images/airpods.jpg",
+      "imageAlt": "Original AirPods",
+      "category": "Classic",
+      "badgeColor": "primary",
+      "badgeGradient": "linear-gradient(135deg, #007bff, #0056b3)"
+    },
+    {
+      "id": 8,
+      "title": "Apple Headphones",
+      "description": "Experience every detail in stunning clarity. Designed for true audiophiles.",
+      "image": "images/apple_headphones.jpg",
+      "imageAlt": "Apple Headphones",
+      "category": "Audio",
+      "badgeColor": "info",
+      "badgeGradient": "linear-gradient(135deg, #17a2b8, #6f42c1)"
+    },
+    {
+      "id": 9,
+      "title": "Smart Watches",
+      "description": "Style meets function. Your life, at a glance — on your wrist.",
+      "image": "images/smart_watches.jpg",
+      "imageAlt": "Smart Watches",
+      "category": "Wearable",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    },
+    {
+      "id": 10,
+      "title": "Printing Services",
+      "description": "High-quality prints for all your professional and personal needs.",
+      "image": "images/printing.jpg",
+      "imageAlt": "Printing Services",
+      "category": "Service",
+      "badgeColor": "secondary",
+      "badgeGradient": "linear-gradient(135deg, #6c757d, #495057)"
+    },
+    {
+      "id": 11,
+      "title": "Perfect Binding",
+      "description": "Neat, professional binding for documents that make a statement.",
+      "image": "images/binding.jpg",
+      "imageAlt": "Perfect Binding",
+      "category": "Professional",
+      "badgeColor": "warning",
+      "badgeGradient": "linear-gradient(135deg, #ffd700, #ffed4e)"
+    },
+    {
+      "id": 12,
+      "title": "Laminating",
+      "description": "Protect and enhance your documents with a sleek, glossy finish.",
+      "image": "images/laminating.jpg",
+      "imageAlt": "Laminating",
+      "category": "Protection",
+      "badgeColor": "primary",
+      "badgeGradient": "linear-gradient(135deg, #007bff, #0056b3)"
+    },
+    {
+      "id": 13,
+      "title": "Omari Agent Services",
+      "description": "Send and receive money with confidence — fast, safe, and easy.",
+      "image": "images/omari.png",
+      "imageAlt": "Omari Agent Services",
+      "category": "Financial",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    },
+    {
+      "id": 14,
+      "title": "Visa Application Assistance",
+      "description": "Travel dreams made easy. We help you every step of the way.",
+      "image": "images/visa1.jpg",
+      "imageAlt": "Visa Assistance",
+      "category": "Travel",
+      "badgeColor": "info",
+      "badgeGradient": "linear-gradient(135deg, #17a2b8, #6f42c1)"
+    },
+    {
+      "id": 15,
+      "title": "Ecocash Agent",
+      "description": "Instant cash-in, cash-out, bill payments, and more at your convenience.",
+      "image": "images/ecocash.png",
+      "imageAlt": "Ecocash Agent",
+      "category": "Mobile Money",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    }
+  ];
+
+        const carouselSlides = [
+    {
+      "id": 1,
+      "title": "Welcome to Wana Trading",
+      "description": "Where technology meets imagination. Explore the hottest gadgets and services under one roof.",
+      "buttonText": "Explore Now",
+      "buttonLink": "products.html",
+      "image": "images/wana_trader.png",
+      "imageAlt": "Wana Trading Logo",
+      "backgroundColor": "#111827",
+      "layout": "left"
+    },
+    {
+      "id": 2,
+      "title": "Immerse in Premium Sound",
+      "description": "Feel every beat. Headphones that make your soul dance.",
+      "buttonText": "Feel the Beat",
+      "buttonLink": "products.html",
+      "image": "images/headphone.jpg",
+      "imageAlt": "Headphones Slide",
+      "backgroundColor": "#1e3a8a",
+      "layout": "right"
+    },
+    {
+      "id": 3,
+      "title": "Stay Connected Seamlessly",
+      "description": "High-speed WiFi and top-tier connectivity services for your lifestyle.",
+      "buttonText": "Connect Now",
+      "buttonLink": "products.html",
+      "image": "images/wifi_friends.jpg",
+      "imageAlt": "WiFi Slide",
+      "backgroundColor": "#047857",
+      "layout": "left"
+    },
+    {
+      "id": 4,
+      "title": "Your Reliable Phone Retail",
+      "description": "Capture moments. Elevate your style. Experience Samusung's magic.",
+      "buttonText": "Shop Phones",
+      "buttonLink": "products.html",
+      "image": "images/samsung_collection.jpg",
+      "imageAlt": "iPhone Slide",
+      "backgroundColor": "#7c3aed",
+      "layout": "right"
+    },
+    {
+      "id": 5,
+      "title": "Gadgets that Inspire",
+      "description": "From work to play, unlock endless possibilities with our gadgets.",
+      "buttonText": "See More",
+      "buttonLink": "products.html",
+      "image": "images/gadget_store.jpg",
+      "imageAlt": "gadgets Slide",
+      "backgroundColor": "#be185d",
+      "layout": "left"
+    },
+    {
+      "id": 6,
+      "title": "Phones Galore",
+      "description": "Find your perfect match from a sea of choices.",
+      "buttonText": "Discover Now",
+      "buttonLink": "products.html",
+      "image": "images/a_lot_of_phones.jpg",
+      "imageAlt": "Many Phones Slide",
+      "backgroundColor": "#0f766e",
+      "layout": "right"
+    },
+    {
+      "id": 7,
+      "title": "AirPods Pro",
+      "description": "Silence the noise. Hear every detail. Next-level listening.",
+      "buttonText": "Get Yours",
+      "buttonLink": "products.html",
+      "image": "images/airpods_pro.jpg",
+      "imageAlt": "AirPods Pro Slide",
+      "backgroundColor": "#d97706",
+      "layout": "left"
+    },
+    {
+      "id": 8,
+      "title": "Original AirPods",
+      "description": "Simple. Iconic. Wire-free freedom at its finest.",
+      "buttonText": "Shop Now",
+      "buttonLink": "products.html",
+      "image": "images/airpods.jpg",
+      "imageAlt": "AirPods Slide",
+      "backgroundColor": "#db2777",
+      "layout": "right"
+    },
+    {
+      "id": 9,
+      "title": "Apple Headphones",
+      "description": "Experience every detail in stunning clarity. Designed for true audiophiles.",
+      "buttonText": "Feel the Sound",
+      "buttonLink": "products.html",
+      "image": "images/apple_headphones.jpg",
+      "imageAlt": "Apple Headphones",
+      "backgroundColor": "#7f1d1d",
+      "layout": "left"
+    },
+    {
+      "id": 10,
+      "title": "Smart Watches",
+      "description": "Style meets function. Your life, at a glance — on your wrist.",
+      "buttonText": "Explore Watches",
+      "buttonLink": "products.html",
+      "image": "images/smart_watches.jpg",
+      "imageAlt": "Smart Watches",
+      "backgroundColor": "#4b5563",
+      "layout": "right"
+    },
+    {
+      "id": 11,
+      "title": "Printing Services",
+      "description": "High-quality prints for all your professional and personal needs.",
+      "buttonText": "Print with Us",
+      "buttonLink": "products.html",
+      "image": "images/printing.jpg",
+      "imageAlt": "Printing",
+      "backgroundColor": "#065f46",
+      "layout": "left"
+    },
+    {
+      "id": 12,
+      "title": "Perfect Binding",
+      "description": "Neat, professional binding for documents that make a statement.",
+      "buttonText": "Get Bound",
+      "buttonLink": "products.html",
+      "image": "images/binding.jpg",
+      "imageAlt": "Binding",
+      "backgroundColor": "#78350f",
+      "layout": "right"
+    },
+    {
+      "id": 13,
+      "title": "Laminating",
+      "description": "Protect and enhance your documents with a sleek, glossy finish.",
+      "buttonText": "Laminate Now",
+      "buttonLink": "products.html",
+      "image": "images/laminating.jpg",
+      "imageAlt": "Laminating",
+      "backgroundColor": "#92400e",
+      "layout": "left"
+    },
+    {
+      "id": 14,
+      "title": "Omari Agent Services",
+      "description": "Send and receive money with confidence — fast, safe, and easy.",
+      "buttonText": "Visit Us",
+      "buttonLink": "products.html",
+      "image": "images/omari.png",
+      "imageAlt": "Omari",
+      "backgroundColor": "#b91c1c",
+      "layout": "right"
+    },
+    {
+      "id": 15,
+      "title": "Visa Application Assistance",
+      "description": "Travel dreams made easy. We help you every step of the way.",
+      "buttonText": "Start Process",
+      "buttonLink": "products.html",
+      "image": "images/visa1.jpg",
+      "imageAlt": "Visa Services",
+      "backgroundColor": "#1d4ed8",
+      "layout": "left"
+    },
+    {
+      "id": 16,
+      "title": "Ecocash Agent",
+      "description": "Instant cash-in, cash-out, bill payments, and more at your convenience.",
+      "buttonText": "Transact Now",
+      "buttonLink": "products.html",
+      "image": "images/ecocash.png",
+      "imageAlt": "Ecocash",
+      "backgroundColor": "#15803d",
+      "layout": "right"
+    }
+  ];
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Quick Update loaded successfully (No server required!)');
+            console.log('📊 Current data loaded:', {
+                'Site Config': siteConfig.company.name,
+                'Products': products.length,
+                'Carousel Slides': carouselSlides.length
+            });
+            
+            // Expose data globally for main website integration
+            window.embeddedSiteConfig = siteConfig;
+            window.embeddedCarouselSlides = carouselSlides;
+            window.embeddedProducts = products;
+            
+            // Save to localStorage for cross-page sharing
+            saveToLocalStorage();
+            
+            populateContactForm();
+        });
+
+        // Save data to localStorage
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem('wanaTrading_siteConfig', JSON.stringify(siteConfig));
+                localStorage.setItem('wanaTrading_carouselSlides', JSON.stringify(carouselSlides));
+                localStorage.setItem('wanaTrading_products', JSON.stringify(products));
+                console.log('💾 Data saved to localStorage for cross-page sharing');
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+            }
+        }
+
+        // Populate contact form
+        function populateContactForm() {
+            if (siteConfig.contact) {
+                document.getElementById('phone1').value = siteConfig.contact.phones[0] || '';
+                document.getElementById('phone2').value = siteConfig.contact.phones[1] || '';
+                document.getElementById('email').value = siteConfig.contact.email || '';
+                document.getElementById('address').value = siteConfig.contact.address || '';
+            }
+        }
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            siteConfig.contact.phones = [
+                document.getElementById('phone1').value,
+                document.getElementById('phone2').value
+            ].filter(phone => phone.trim());
+            siteConfig.contact.email = document.getElementById('email').value;
+            siteConfig.contact.address = document.getElementById('address').value;
+
+            saveToLocalStorage();
+            showSuccess('contactSuccess');
+        });
+
+        // Product form submission
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newProduct = {
+                id: products.length + 1,
+                title: document.getElementById('productName').value,
+                description: document.getElementById('productDescription').value,
+                image: document.getElementById('productImage').value,
+                imageAlt: document.getElementById('productName').value,
+                category: document.getElementById('productCategory').value,
+                badgeColor: document.getElementById('productBadgeColor').value,
+                badgeGradient: getBadgeGradient(document.getElementById('productBadgeColor').value)
+            };
+
+            products.push(newProduct);
+            saveToLocalStorage();
+            showSuccess('productSuccess');
+            
+            // Reset form
+            document.getElementById('productForm').reset();
+        });
+
+        // Slide form submission
+        document.getElementById('slideForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newSlide = {
+                id: carouselSlides.length + 1,
+                title: document.getElementById('slideTitle').value,
+                description: document.getElementById('slideDescription').value,
+                buttonText: document.getElementById('slideButtonText').value,
+                buttonLink: "products.html",
+                image: document.getElementById('slideImage').value,
+                imageAlt: document.getElementById('slideTitle').value,
+                backgroundColor: document.getElementById('slideBackgroundColor').value,
+                layout: document.getElementById('slideLayout').value
+            };
+
+            carouselSlides.push(newSlide);
+            saveToLocalStorage();
+            showSuccess('slideSuccess');
+            
+            // Reset form
+            document.getElementById('slideForm').reset();
+        });
+
+        // Helper functions
+        function showSuccess(elementId) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        function getBadgeGradient(color) {
+            const gradients = {
+                'primary': 'linear-gradient(135deg, #667eea, #764ba2)',
+                'success': 'linear-gradient(135deg, #28a745, #20c997)',
+                'info': 'linear-gradient(135deg, #17a2b8, #6f42c1)',
+                'warning': 'linear-gradient(135deg, #ffd700, #ffed4e)',
+                'danger': 'linear-gradient(135deg, #dc3545, #fd7e14)',
+                'secondary': 'linear-gradient(135deg, #6c757d, #495057)'
+            };
+            return gradients[color] || gradients['primary'];
+        }
+
+        // Download functions
+        function downloadSiteConfig() {
+            const blob = new Blob([JSON.stringify(siteConfig, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'site-config.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadProducts() {
+            const blob = new Blob([JSON.stringify({products: products}, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'products.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadCarousel() {
+            const blob = new Blob([JSON.stringify({slides: carouselSlides}, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'carousel-slides.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html> 

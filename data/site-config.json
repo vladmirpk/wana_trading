@@ -1,0 +1,99 @@
+{
+  "company": {
+    "name": "Wana Tradin",
+    "tagline": "Your one-stop destination for premium gadgets and innovative services. We bring technology and convenience together.",
+    "logo": "images/wana_trader.png",
+    "logoAlt": "Wana Trading"
+  },
+  "contact": {
+    "phones": [
+      "+263 782 712 390",
+      "+263 786 607 329"
+    ],
+    "email": "info@wanatrading.com",
+    "address": "Shop 19, Eastgate Mall, Harare"
+  },
+  "social": {
+    "facebook": "#",
+    "twitter": "#",
+    "instagram": "#",
+    "whatsapp": "#"
+  },
+  "navigation": [
+    {
+      "text": "Home",
+      "link": "#heroCarousel"
+    },
+    {
+      "text": "Products",
+      "link": "products.html"
+    },
+    {
+      "text": "About",
+      "link": "about.html"
+    },
+    {
+      "text": "Services",
+      "link": "services.html"
+    },
+    {
+      "text": "Contact",
+      "link": "contact.html"
+    }
+  ],
+  "footer": {
+    "quickLinks": [
+      {
+        "text": "Home",
+        "link": "#heroCarousel"
+      },
+      {
+        "text": "Products",
+        "link": "products.html"
+      },
+      {
+        "text": "About Us",
+        "link": "about.html"
+      },
+      {
+        "text": "Services",
+        "link": "services.html"
+      },
+      {
+        "text": "Contact",
+        "link": "contact.html"
+      }
+    ],
+    "services": [
+      {
+        "text": "Mobile Phones",
+        "link": "#"
+      },
+      {
+        "text": "Audio Equipment",
+        "link": "#"
+      },
+      {
+        "text": "Printing Services",
+        "link": "#"
+      },
+      {
+        "text": "Financial Services",
+        "link": "#"
+      },
+      {
+        "text": "Visa Assistance",
+        "link": "#"
+      }
+    ],
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Stay updated with our latest products and offers.",
+      "placeholder": "Your email"
+    }
+  },
+  "copyright": {
+    "text": "© 2024 Wana Trading. All rights reserved.",
+    "designer": "Designed with ❤️ for excellence"
+  }
+}

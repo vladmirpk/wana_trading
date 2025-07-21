@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>About Us - Wana Trading</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <style>
+    /* ===== GLOBAL STYLES ===== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      padding-top: 80px; /* Account for fixed navbar */
+    }
+
+    /* ===== NAVIGATION ===== */
+    .navbar {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.98) !important;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #333 !important;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .nav-link {
+      color: #333 !important;
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin: 0 15px;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ffd700, #ffed4e);
+      border-radius: 2px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-50%);
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .nav-link:hover {
+      color: #ffd700 !important;
+      transform: translateY(-2px);
+    }
+    
+    /* Navbar toggler for mobile */
+    .navbar-toggler {
+      border: none;
+      padding: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-toggler:focus {
+      outline: none;
+      box-shadow: none;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(51, 51, 51, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      transition: all 0.3s ease;
+    }
+    
+    /* Mobile menu styling */
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        border-radius: 15px;
+        margin-top: 1rem;
+        padding: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      
+      .nav-link {
+        padding: 0.75rem 1rem;
+        margin: 0.25rem 0;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-link:hover {
+        background: rgba(255, 215, 0, 0.1);
+        transform: translateX(5px);
+      }
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.8rem;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      padding: 40px 0;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #ffd700, #ffed4e);
+      border-radius: 2px;
+      margin: 0 auto 2rem;
+    }
+
+    /* ===== STORY SECTION ===== */
+    .story-section {
+      background: #f8f9fa;
+    }
+
+    .story-card {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .story-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    }
+
+    .story-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    /* ===== VALUES SECTION ===== */
+    .values-section {
+      background: white;
+    }
+
+    .value-card {
+      text-align: center;
+      padding: 1.2rem;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .value-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.2rem;
+      color: white;
+    }
+
+    /* ===== TEAM SECTION ===== */
+    .team-section {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    .team-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    }
+
+    .team-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .team-info {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .team-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .team-role {
+      color: #ffd700;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .team-social {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .team-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .team-social a:hover {
+      transform: scale(1.1);
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      color: #333;
+    }
+
+    /* ===== STATS SECTION ===== */
+    .stats-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: #ffd700;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: white;
+      padding: 3rem 0 1rem;
+    }
+
+    .footer h6 {
+      color: #ffd700;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: #ffd700;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      border-color: #ffd700;
+      background: #ffd700;
+      color: #333;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 100px 0 60px;
+      }
+      
+      .section {
+        padding: 60px 0;
+      }
+      
+      .story-card {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/wana_trader.png" alt="Wana Trading" height="40" class="d-inline-block align-top mr-2">
+        Wana Trading
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#products">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="hero-content">
+            <h1 class="hero-title">About Wana Trading</h1>
+            <p class="hero-subtitle">Discover our journey, values, and the passionate team behind your trusted technology partner.</p>
+            <a href="#story" class="btn btn-warning btn-lg">Learn Our Story</a>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <img src="images/wana_trader.png" alt="Wana Trading" style="max-width: 400px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section id="story" class="section story-section">
+    <div class="container">
+      <h2 class="section-title">Our Story</h2>
+      <div class="section-divider"></div>
+      
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="story-card">
+            <div class="story-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <h4 class="text-center mb-3">Our Beginning</h4>
+            <p class="text-muted">Founded in 2018, Wana Trading started as a small mobile phone shop with a big vision. We wanted to be more than just a retailer - we wanted to be a technology partner for our community.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 mb-4">
+          <div class="story-card">
+            <div class="story-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h4 class="text-center mb-3">Growth & Expansion</h4>
+            <p class="text-muted">Through dedication and customer trust, we expanded our services to include audio equipment, printing services, financial services, and visa assistance. Today, we're a comprehensive technology hub.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 mb-4">
+          <div class="story-card">
+            <div class="story-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <h4 class="text-center mb-3">Our Future</h4>
+            <p class="text-muted">We continue to innovate and adapt to the ever-changing technology landscape. Our commitment remains the same: providing quality products and exceptional service to our valued customers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="section values-section">
+    <div class="container">
+      <h2 class="section-title">Our Values</h2>
+      <div class="section-divider"></div>
+      
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h5>Customer First</h5>
+            <p class="text-muted">Every decision we make is centered around providing the best experience for our customers.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h5>Quality Assurance</h5>
+            <p class="text-muted">We never compromise on quality. Every product and service meets our high standards.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <h5>Trust & Integrity</h5>
+            <p class="text-muted">Building lasting relationships through honest, transparent business practices.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h5>Innovation</h5>
+            <p class="text-muted">Constantly evolving and embracing new technologies to serve our customers better.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="section stats-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-item">
+            <div class="stat-number">5000+</div>
+            <div class="stat-label">Happy Customers</div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-item">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Years of Excellence</div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-item">
+            <div class="stat-number">15+</div>
+            <div class="stat-label">Services Offered</div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Customer Support</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="section team-section">
+    <div class="container">
+      <h2 class="section-title">Meet Our Team</h2>
+      <div class="section-divider"></div>
+      
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="team-card">
+            <img src="images/CV.jpg" alt="Team Member" class="team-image">
+            <div class="team-info">
+              <h5 class="team-name">John Doe</h5>
+              <p class="team-role">Founder & CEO</p>
+              <p class="text-muted">Visionary leader with 10+ years in technology retail and customer service.</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="team-card">
+            <img src="images/CV.jpg" alt="Team Member" class="team-image">
+            <div class="team-info">
+              <h5 class="team-name">Jane Smith</h5>
+              <p class="team-role">Operations Manager</p>
+              <p class="text-muted">Expert in streamlining operations and ensuring customer satisfaction.</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="team-card">
+            <img src="images/CV.jpg" alt="Team Member" class="team-image">
+            <div class="team-info">
+              <h5 class="team-name">Mike Johnson</h5>
+              <p class="team-role">Technical Specialist</p>
+              <p class="text-muted">Certified technician with deep knowledge of all our products and services.</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); position: relative; overflow: hidden;">
+    <!-- Background Pattern -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;><defs><pattern id=&quot;footer-grain&quot; width=&quot;100&quot; height=&quot;100&quot; patternUnits=&quot;userSpaceOnUse&quot;><circle cx=&quot;25&quot; cy=&quot;25&quot; r=&quot;0.5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;0.05&quot;/><circle cx=&quot;75&quot; cy=&quot;75&quot; r=&quot;0.5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;0.05&quot;/><circle cx=&quot;50&quot; cy=&quot;10&quot; r=&quot;0.3&quot; fill=&quot;%23ffffff&quot; opacity=&quot;0.05&quot;/><circle cx=&quot;10&quot; cy=&quot;60&quot; r=&quot;0.3&quot; fill=&quot;%23ffffff&quot; opacity=&quot;0.05&quot;/><circle cx=&quot;90&quot; cy=&quot;40&quot; r=&quot;0.3&quot; fill=&quot;%23ffffff&quot; opacity=&quot;0.05&quot;/></pattern></defs><rect width=&quot;100&quot; height=&quot;100&quot; fill=&quot;url(%23footer-grain)&quot;/></svg>'); opacity: 0.3;"></div>
+    
+    <div class="container position-relative">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-3">
+          <div class="d-flex align-items-center mb-2">
+            <img src="images/wana_trader.png" alt="Wana Trading" height="40" class="mr-2">
+            <h6 class="mb-0 font-weight-bold" style="background: linear-gradient(135deg, #ffd700, #ffed4e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.1rem;">Wana Trading</h6>
+          </div>
+          <p class="text-muted mb-3" style="font-size: 0.85rem; line-height: 1.4;">Your one-stop destination for premium gadgets and innovative services. We bring technology and convenience together.</p>
+          <div class="social-links">
+            <a href="#" class="btn btn-outline-light btn-sm mr-2" style="border-radius: 50%; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.3s ease;">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="btn btn-outline-light btn-sm mr-2" style="border-radius: 50%; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.3s ease;">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="btn btn-outline-light btn-sm mr-2" style="border-radius: 50%; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.3s ease;">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="btn btn-outline-light btn-sm" style="border-radius: 50%; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.3s ease;">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="col-lg-2 col-md-6 mb-3">
+          <h6 class="font-weight-bold mb-2" style="color: #ffd700; font-size: 0.9rem;">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li class="mb-1"><a href="index.html" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Home</a></li>
+            <li class="mb-1"><a href="index.html#products" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Products</a></li>
+            <li class="mb-1"><a href="about.html" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">About Us</a></li>
+            <li class="mb-1"><a href="services.html" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Services</a></li>
+            <li class="mb-1"><a href="contact.html" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+          <h6 class="font-weight-bold mb-2" style="color: #ffd700; font-size: 0.9rem;">Our Services</h6>
+          <ul class="list-unstyled">
+            <li class="mb-1"><a href="#" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Mobile Phones</a></li>
+            <li class="mb-1"><a href="#" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Audio Equipment</a></li>
+            <li class="mb-1"><a href="#" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Printing Services</a></li>
+            <li class="mb-1"><a href="#" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Financial Services</a></li>
+            <li class="mb-1"><a href="#" class="text-muted text-decoration-none" style="font-size: 0.8rem; transition: color 0.3s ease;">Visa Assistance</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+          <h6 class="font-weight-bold mb-2" style="color: #ffd700; font-size: 0.9rem;">Contact Info</h6>
+          <p class="mb-1 text-muted" style="font-size: 0.8rem;"><i class="fas fa-phone mr-2" style="color: #ffd700; font-size: 0.7rem;"></i>+263 782 712 390</p>
+          <p class="mb-1 text-muted" style="font-size: 0.8rem;"><i class="fas fa-phone mr-2" style="color: #ffd700; font-size: 0.7rem;"></i>+263 786 607 329</p>
+          <p class="mb-1 text-muted" style="font-size: 0.8rem;"><i class="fas fa-envelope mr-2" style="color: #ffd700; font-size: 0.7rem;"></i>info@wanatrading.com</p>
+          <p class="mb-0 text-muted" style="font-size: 0.8rem;"><i class="fas fa-map-marker-alt mr-2" style="color: #ffd700; font-size: 0.7rem;"></i>Shop 19, Eastgate Mall, Harare</p>
+        </div>
+      </div>
+      
+      <hr class="my-3" style="border-color: #444;">
+      
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="mb-0 text-muted" style="font-size: 0.75rem;">&copy; 2024 Wana Trading. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-md-right">
+          <p class="mb-0 text-muted" style="font-size: 0.75rem;">Designed with <i class="fas fa-heart" style="color: #ffd700;"></i> for excellence</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Animate elements on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          gsap.fromTo(entry.target, 
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }
+          );
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.story-card, .value-card, .team-card, .stat-item').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Counter animation for stats
+    function animateCounter(element, target) {
+      let current = 0;
+      const increment = target / 100;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        element.textContent = Math.floor(current) + (target === 24/7 ? '' : '+');
+      }, 20);
+    }
+
+    // Trigger counter animation when stats section is visible
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statNumbers = entry.target.querySelectorAll('.stat-number');
+          statNumbers.forEach(stat => {
+            const text = stat.textContent;
+            const number = text.includes('+') ? parseInt(text) : text;
+            if (typeof number === 'number') {
+              animateCounter(stat, number);
+            }
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    });
+
+    document.querySelector('.stats-section').forEach(section => {
+      statsObserver.observe(section);
+    });
+  </script>
+</body>
+</html> 

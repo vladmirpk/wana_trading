@@ -1,0 +1,154 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Premium Headphones",
+      "description": "Feel every beat. Headphones that make your soul dance.",
+      "image": "images/headphone.jpg",
+      "imageAlt": "Premium Headphones",
+      "category": "Audio",
+      "badgeColor": "primary",
+      "badgeGradient": "linear-gradient(135deg, #667eea, #764ba2)"
+    },
+    {
+      "id": 2,
+      "title": "WiFi & Connectivity",
+      "description": "High-speed WiFi and top-tier connectivity services for your lifestyle.",
+      "image": "images/wifi.jpg",
+      "imageAlt": "WiFi & Connectivity",
+      "category": "Service",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    },
+    {
+      "id": 3,
+      "title": "Apple iPhones",
+      "description": "Capture moments. Elevate your style. Experience Apple's magic.",
+      "image": "images/iphones.jpg",
+      "imageAlt": "Apple iPhones",
+      "category": "Mobile",
+      "badgeColor": "info",
+      "badgeGradient": "linear-gradient(135deg, #17a2b8, #6f42c1)"
+    },
+    {
+      "id": 4,
+      "title": "Tablets",
+      "description": "From work to play, unlock endless possibilities with our tablets.",
+      "image": "images/tablets.jpg",
+      "imageAlt": "Tablets",
+      "category": "Tablet",
+      "badgeColor": "secondary",
+      "badgeGradient": "linear-gradient(135deg, #6c757d, #495057)"
+    },
+    {
+      "id": 5,
+      "title": "Smartphones",
+      "description": "Find your perfect match from a sea of choices.",
+      "image": "images/a_lot_of_phones.jpg",
+      "imageAlt": "Smartphones",
+      "category": "Hot",
+      "badgeColor": "danger",
+      "badgeGradient": "linear-gradient(135deg, #dc3545, #fd7e14)"
+    },
+    {
+      "id": 6,
+      "title": "AirPods Pro",
+      "description": "Silence the noise. Hear every detail. Next-level listening.",
+      "image": "images/airpods_pro.jpg",
+      "imageAlt": "AirPods Pro",
+      "category": "Premium",
+      "badgeColor": "warning",
+      "badgeGradient": "linear-gradient(135deg, #ffd700, #ffed4e)"
+    },
+    {
+      "id": 7,
+      "title": "Original AirPods",
+      "description": "Simple. Iconic. Wire-free freedom at its finest.",
+      "image": "images/airpods.jpg",
+      "imageAlt": "Original AirPods",
+      "category": "Classic",
+      "badgeColor": "primary",
+      "badgeGradient": "linear-gradient(135deg, #007bff, #0056b3)"
+    },
+    {
+      "id": 8,
+      "title": "Apple Headphones",
+      "description": "Experience every detail in stunning clarity. Designed for true audiophiles.",
+      "image": "images/apple_headphones.jpg",
+      "imageAlt": "Apple Headphones",
+      "category": "Audio",
+      "badgeColor": "info",
+      "badgeGradient": "linear-gradient(135deg, #17a2b8, #6f42c1)"
+    },
+    {
+      "id": 9,
+      "title": "Smart Watches",
+      "description": "Style meets function. Your life, at a glance — on your wrist.",
+      "image": "images/smart_watches.jpg",
+      "imageAlt": "Smart Watches",
+      "category": "Wearable",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    },
+    {
+      "id": 10,
+      "title": "Printing Services",
+      "description": "High-quality prints for all your professional and personal needs.",
+      "image": "images/printing.jpg",
+      "imageAlt": "Printing Services",
+      "category": "Service",
+      "badgeColor": "secondary",
+      "badgeGradient": "linear-gradient(135deg, #6c757d, #495057)"
+    },
+    {
+      "id": 11,
+      "title": "Perfect Binding",
+      "description": "Neat, professional binding for documents that make a statement.",
+      "image": "images/binding.jpg",
+      "imageAlt": "Perfect Binding",
+      "category": "Professional",
+      "badgeColor": "warning",
+      "badgeGradient": "linear-gradient(135deg, #ffd700, #ffed4e)"
+    },
+    {
+      "id": 12,
+      "title": "Laminating",
+      "description": "Protect and enhance your documents with a sleek, glossy finish.",
+      "image": "images/laminating.jpg",
+      "imageAlt": "Laminating",
+      "category": "Protection",
+      "badgeColor": "primary",
+      "badgeGradient": "linear-gradient(135deg, #007bff, #0056b3)"
+    },
+    {
+      "id": 13,
+      "title": "Omari Agent Services",
+      "description": "Send and receive money with confidence — fast, safe, and easy.",
+      "image": "images/omari.png",
+      "imageAlt": "Omari Agent Services",
+      "category": "Financial",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    },
+    {
+      "id": 14,
+      "title": "Visa Application Assistance",
+      "description": "Travel dreams made easy. We help you every step of the way.",
+      "image": "images/visa1.jpg",
+      "imageAlt": "Visa Assistance",
+      "category": "Travel",
+      "badgeColor": "info",
+      "badgeGradient": "linear-gradient(135deg, #17a2b8, #6f42c1)"
+    },
+    {
+      "id": 15,
+      "title": "Ecocash Agent",
+      "description": "Instant cash-in, cash-out, bill payments, and more at your convenience.",
+      "image": "images/ecocash.png",
+      "imageAlt": "Ecocash Agent",
+      "category": "Mobile Money",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    }
+  ]
+}

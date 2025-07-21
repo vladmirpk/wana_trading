@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wana Trading - One Click Updates</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .main-card {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .update-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .update-card:hover {
+            transform: translateY(-5px);
+        }
+        .btn-update {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-update:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+        }
+        .form-control {
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            padding: 15px;
+            font-size: 16px;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .success-animation {
+            animation: successPulse 0.6s ease;
+        }
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .floating-action {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        .quick-actions {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <!-- Header -->
+        <div class="header-section mb-4">
+            <img src="images/wana_trader.png" alt="Wana Trading" height="80" class="mb-3">
+            <h1>One-Click Updates</h1>
+            <p class="mb-0">Update your website content with just one click!</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h4 class="text-white mb-3"><i class="fas fa-bolt me-2"></i>Quick Actions</h4>
+            <div class="row">
+                <div class="col-md-3 mb-2">
+                    <button class="btn btn-light w-100" onclick="quickUpdate('phone')">
+                        <i class="fas fa-phone me-2"></i>Change Phone
+                    </button>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <button class="btn btn-light w-100" onclick="quickUpdate('email')">
+                        <i class="fas fa-envelope me-2"></i>Change Email
+                    </button>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <button class="btn btn-light w-100" onclick="quickUpdate('address')">
+                        <i class="fas fa-map-marker-alt me-2"></i>Change Address
+                    </button>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <button class="btn btn-light w-100" onclick="quickUpdate('product')">
+                        <i class="fas fa-plus me-2"></i>Add Product
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-card">
+            <!-- Phone Number Update -->
+            <div class="card update-card" id="phoneCard">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <i class="fas fa-phone fa-3x text-primary"></i>
+                        </div>
+                        <div class="col-md-7">
+                            <h5 class="mb-2">Update Phone Numbers</h5>
+                            <p class="text-muted mb-0">Change your business contact numbers</p>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <button class="btn btn-update" onclick="showPhoneForm()">
+                                <i class="fas fa-edit me-2"></i>Update
+                            </button>
+                        </div>
+                    </div>
+                    <div class="phone-form mt-3" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="tel" class="form-control mb-2" id="newPhone1" placeholder="Primary Phone">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="tel" class="form-control mb-2" id="newPhone2" placeholder="Secondary Phone">
+                            </div>
+                        </div>
+                        <button class="btn btn-success" onclick="updatePhone()">
+                            <i class="fas fa-save me-2"></i>Save Changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Update -->
+            <div class="card update-card" id="emailCard">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <i class="fas fa-envelope fa-3x text-success"></i>
+                        </div>
+                        <div class="col-md-7">
+                            <h5 class="mb-2">Update Email Address</h5>
+                            <p class="text-muted mb-0">Change your business email address</p>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <button class="btn btn-update" onclick="showEmailForm()">
+                                <i class="fas fa-edit me-2"></i>Update
+                            </button>
+                        </div>
+                    </div>
+                    <div class="email-form mt-3" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="email" class="form-control mb-2" id="newEmail" placeholder="New Email Address">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-success w-100" onclick="updateEmail()">
+                                    <i class="fas fa-save me-2"></i>Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Update -->
+            <div class="card update-card" id="addressCard">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <i class="fas fa-map-marker-alt fa-3x text-warning"></i>
+                        </div>
+                        <div class="col-md-7">
+                            <h5 class="mb-2">Update Business Address</h5>
+                            <p class="text-muted mb-0">Change your business location</p>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <button class="btn btn-update" onclick="showAddressForm()">
+                                <i class="fas fa-edit me-2"></i>Update
+                            </button>
+                        </div>
+                    </div>
+                    <div class="address-form mt-3" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="text" class="form-control mb-2" id="newAddress" placeholder="New Business Address">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-success w-100" onclick="updateAddress()">
+                                    <i class="fas fa-save me-2"></i>Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Product -->
+            <div class="card update-card" id="productCard">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <i class="fas fa-box fa-3x text-info"></i>
+                        </div>
+                        <div class="col-md-7">
+                            <h5 class="mb-2">Add New Product</h5>
+                            <p class="text-muted mb-0">Add a new product to your catalog</p>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <button class="btn btn-update" onclick="showProductForm()">
+                                <i class="fas fa-plus me-2"></i>Add
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-form mt-3" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control mb-2" id="productName" placeholder="Product Name">
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-control mb-2" id="productCategory">
+                                    <option value="">Select Category</option>
+                                    <option value="Mobile">Mobile</option>
+                                    <option value="Audio">Audio</option>
+                                    <option value="Service">Service</option>
+                                    <option value="Premium">Premium</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <textarea class="form-control mb-2" id="productDescription" rows="2" placeholder="Product Description"></textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-success w-100" onclick="addProduct()">
+                                    <i class="fas fa-plus me-2"></i>Add Product
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Slide -->
+            <div class="card update-card" id="slideCard">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <i class="fas fa-images fa-3x text-danger"></i>
+                        </div>
+                        <div class="col-md-7">
+                            <h5 class="mb-2">Add New Slide</h5>
+                            <p class="text-muted mb-0">Add a new slide to your homepage carousel</p>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <button class="btn btn-update" onclick="showSlideForm()">
+                                <i class="fas fa-plus me-2"></i>Add
+                            </button>
+                        </div>
+                    </div>
+                    <div class="slide-form mt-3" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control mb-2" id="slideTitle" placeholder="Slide Title">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control mb-2" id="slideImage" placeholder="Image Path (e.g., images/new.jpg)">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <textarea class="form-control mb-2" id="slideDescription" rows="2" placeholder="Slide Description"></textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-success w-100" onclick="addSlide()">
+                                    <i class="fas fa-plus me-2"></i>Add Slide
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Section -->
+        <div class="card update-card mt-4">
+            <div class="card-body p-4">
+                <h5 class="mb-3"><i class="fas fa-download me-2"></i>Download Updated Files</h5>
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-outline-primary w-100" onclick="downloadFile('site-config.json')">
+                            <i class="fas fa-cog me-2"></i>Site Config
+                        </button>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-outline-success w-100" onclick="downloadFile('products.json')">
+                            <i class="fas fa-box me-2"></i>Products
+                        </button>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-outline-warning w-100" onclick="downloadFile('carousel-slides.json')">
+                            <i class="fas fa-images me-2"></i>Carousel
+                        </button>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-outline-info w-100" onclick="downloadAll()">
+                            <i class="fas fa-download me-2"></i>All Files
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="text-center mt-4">
+            <a href="admin.html" class="btn btn-light me-3">
+                <i class="fas fa-cog me-2"></i>Full Admin Panel
+            </a>
+            <a href="quick-update.html" class="btn btn-light me-3">
+                <i class="fas fa-edit me-2"></i>Quick Updates
+            </a>
+            <a href="index.html" class="btn btn-light">
+                <i class="fas fa-home me-2"></i>View Website
+            </a>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="floating-action">
+        <button class="btn btn-primary btn-lg rounded-circle" onclick="showHelp()" title="Help">
+            <i class="fas fa-question"></i>
+        </button>
+    </div>
+
+    <script>
+        // Embedded data (no server required!)
+        const siteConfig = {
+  "company": {
+    "name": "Wana Trading",
+    "tagline": "Your one-stop destination for premium gadgets and innovative services. We bring technology and convenience together.",
+    "logo": "images/wana_trader.png",
+    "logoAlt": "Wana Trading"
+  },
+  "contact": {
+    "phones": [
+      "+263 782 712 390",
+      "+263 786 607 329"
+    ],
+    "email": "info@wanatrading.com",
+    "address": "Shop 19, Eastgate Mall, Harare"
+  },
+  "social": {
+    "facebook": "#",
+    "twitter": "#",
+    "instagram": "#",
+    "whatsapp": "#"
+  },
+  "navigation": [
+    {
+      "text": "Home",
+      "link": "#heroCarousel"
+    },
+    {
+      "text": "Products",
+      "link": "products.html"
+    },
+    {
+      "text": "About",
+      "link": "about.html"
+    },
+    {
+      "text": "Services",
+      "link": "services.html"
+    },
+    {
+      "text": "Contact",
+      "link": "contact.html"
+    }
+  ],
+  "footer": {
+    "quickLinks": [
+      {
+        "text": "Home",
+        "link": "#heroCarousel"
+      },
+      {
+        "text": "Products",
+        "link": "products.html"
+      },
+      {
+        "text": "About Us",
+        "link": "about.html"
+      },
+      {
+        "text": "Services",
+        "link": "services.html"
+      },
+      {
+        "text": "Contact",
+        "link": "contact.html"
+      }
+    ],
+    "services": [
+      {
+        "text": "Mobile Phones",
+        "link": "#"
+      },
+      {
+        "text": "Audio Equipment",
+        "link": "#"
+      },
+      {
+        "text": "Printing Services",
+        "link": "#"
+      },
+      {
+        "text": "Financial Services",
+        "link": "#"
+      },
+      {
+        "text": "Visa Assistance",
+        "link": "#"
+      }
+    ],
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Stay updated with our latest products and offers.",
+      "placeholder": "Your email"
+    }
+  },
+  "copyright": {
+    "text": "© 2024 Wana Trading. All rights reserved.",
+    "designer": "Designed with ❤️ for excellence"
+  }
+};
+
+        const products = [
+    {
+      "id": 1,
+      "title": "Premium Headphones",
+      "description": "Feel every beat. Headphones that make your soul dance.",
+      "image": "images/headphone.jpg",
+      "imageAlt": "Premium Headphones",
+      "category": "Audio",
+      "badgeColor": "primary",
+      "badgeGradient": "linear-gradient(135deg, #667eea, #764ba2)"
+    },
+    {
+      "id": 2,
+      "title": "WiFi & Connectivity",
+      "description": "High-speed WiFi and top-tier connectivity services for your lifestyle.",
+      "image": "images/wifi.jpg",
+      "imageAlt": "WiFi & Connectivity",
+      "category": "Service",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    },
+    {
+      "id": 3,
+      "title": "Apple iPhones",
+      "description": "Capture moments. Elevate your style. Experience Apple's magic.",
+      "image": "images/iphones.jpg",
+      "imageAlt": "Apple iPhones",
+      "category": "Mobile",
+      "badgeColor": "info",
+      "badgeGradient": "linear-gradient(135deg, #17a2b8, #6f42c1)"
+    },
+    {
+      "id": 4,
+      "title": "Tablets",
+      "description": "From work to play, unlock endless possibilities with our tablets.",
+      "image": "images/tablets.jpg",
+      "imageAlt": "Tablets",
+      "category": "Tablet",
+      "badgeColor": "secondary",
+      "badgeGradient": "linear-gradient(135deg, #6c757d, #495057)"
+    },
+    {
+      "id": 5,
+      "title": "Smartphones",
+      "description": "Find your perfect match from a sea of choices.",
+      "image": "images/a_lot_of_phones.jpg",
+      "imageAlt": "Smartphones",
+      "category": "Hot",
+      "badgeColor": "danger",
+      "badgeGradient": "linear-gradient(135deg, #dc3545, #fd7e14)"
+    },
+    {
+      "id": 6,
+      "title": "AirPods Pro",
+      "description": "Silence the noise. Hear every detail. Next-level listening.",
+      "image": "images/airpods_pro.jpg",
+      "imageAlt": "AirPods Pro",
+      "category": "Premium",
+      "badgeColor": "warning",
+      "badgeGradient": "linear-gradient(135deg, #ffd700, #ffed4e)"
+    },
+    {
+      "id": 7,
+      "title": "Original AirPods",
+      "description": "Simple. Iconic. Wire-free freedom at its finest.",
+      "image": "images/airpods.jpg",
+      "imageAlt": "Original AirPods",
+      "category": "Classic",
+      "badgeColor": "primary",
+      "badgeGradient": "linear-gradient(135deg, #007bff, #0056b3)"
+    },
+    {
+      "id": 8,
+      "title": "Apple Headphones",
+      "description": "Experience every detail in stunning clarity. Designed for true audiophiles.",
+      "image": "images/apple_headphones.jpg",
+      "imageAlt": "Apple Headphones",
+      "category": "Audio",
+      "badgeColor": "info",
+      "badgeGradient": "linear-gradient(135deg, #17a2b8, #6f42c1)"
+    },
+    {
+      "id": 9,
+      "title": "Smart Watches",
+      "description": "Style meets function. Your life, at a glance — on your wrist.",
+      "image": "images/smart_watches.jpg",
+      "imageAlt": "Smart Watches",
+      "category": "Wearable",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    },
+    {
+      "id": 10,
+      "title": "Printing Services",
+      "description": "High-quality prints for all your professional and personal needs.",
+      "image": "images/printing.jpg",
+      "imageAlt": "Printing Services",
+      "category": "Service",
+      "badgeColor": "secondary",
+      "badgeGradient": "linear-gradient(135deg, #6c757d, #495057)"
+    },
+    {
+      "id": 11,
+      "title": "Perfect Binding",
+      "description": "Neat, professional binding for documents that make a statement.",
+      "image": "images/binding.jpg",
+      "imageAlt": "Perfect Binding",
+      "category": "Professional",
+      "badgeColor": "warning",
+      "badgeGradient": "linear-gradient(135deg, #ffd700, #ffed4e)"
+    },
+    {
+      "id": 12,
+      "title": "Laminating",
+      "description": "Protect and enhance your documents with a sleek, glossy finish.",
+      "image": "images/laminating.jpg",
+      "imageAlt": "Laminating",
+      "category": "Protection",
+      "badgeColor": "primary",
+      "badgeGradient": "linear-gradient(135deg, #007bff, #0056b3)"
+    },
+    {
+      "id": 13,
+      "title": "Omari Agent Services",
+      "description": "Send and receive money with confidence — fast, safe, and easy.",
+      "image": "images/omari.png",
+      "imageAlt": "Omari Agent Services",
+      "category": "Financial",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    },
+    {
+      "id": 14,
+      "title": "Visa Application Assistance",
+      "description": "Travel dreams made easy. We help you every step of the way.",
+      "image": "images/visa1.jpg",
+      "imageAlt": "Visa Assistance",
+      "category": "Travel",
+      "badgeColor": "info",
+      "badgeGradient": "linear-gradient(135deg, #17a2b8, #6f42c1)"
+    },
+    {
+      "id": 15,
+      "title": "Ecocash Agent",
+      "description": "Instant cash-in, cash-out, bill payments, and more at your convenience.",
+      "image": "images/ecocash.png",
+      "imageAlt": "Ecocash Agent",
+      "category": "Mobile Money",
+      "badgeColor": "success",
+      "badgeGradient": "linear-gradient(135deg, #28a745, #20c997)"
+    }
+  ];
+
+        const carouselSlides = [
+    {
+      "id": 1,
+      "title": "Welcome to Wana Trading",
+      "description": "Where technology meets imagination. Explore the hottest gadgets and services under one roof.",
+      "buttonText": "Explore Now",
+      "buttonLink": "products.html",
+      "image": "images/wana_trader.png",
+      "imageAlt": "Wana Trading Logo",
+      "backgroundColor": "#111827",
+      "layout": "left"
+    },
+    {
+      "id": 2,
+      "title": "Immerse in Premium Sound",
+      "description": "Feel every beat. Headphones that make your soul dance.",
+      "buttonText": "Feel the Beat",
+      "buttonLink": "products.html",
+      "image": "images/headphone.jpg",
+      "imageAlt": "Headphones Slide",
+      "backgroundColor": "#1e3a8a",
+      "layout": "right"
+    },
+    {
+      "id": 3,
+      "title": "Stay Connected Seamlessly",
+      "description": "High-speed WiFi and top-tier connectivity services for your lifestyle.",
+      "buttonText": "Connect Now",
+      "buttonLink": "products.html",
+      "image": "images/wifi_friends.jpg",
+      "imageAlt": "WiFi Slide",
+      "backgroundColor": "#047857",
+      "layout": "left"
+    },
+    {
+      "id": 4,
+      "title": "Your Reliable Phone Retail",
+      "description": "Capture moments. Elevate your style. Experience Samusung's magic.",
+      "buttonText": "Shop Phones",
+      "buttonLink": "products.html",
+      "image": "images/samsung_collection.jpg",
+      "imageAlt": "iPhone Slide",
+      "backgroundColor": "#7c3aed",
+      "layout": "right"
+    },
+    {
+      "id": 5,
+      "title": "Gadgets that Inspire",
+      "description": "From work to play, unlock endless possibilities with our gadgets.",
+      "buttonText": "See More",
+      "buttonLink": "products.html",
+      "image": "images/gadget_store.jpg",
+      "imageAlt": "gadgets Slide",
+      "backgroundColor": "#be185d",
+      "layout": "left"
+    },
+    {
+      "id": 6,
+      "title": "Phones Galore",
+      "description": "Find your perfect match from a sea of choices.",
+      "buttonText": "Discover Now",
+      "buttonLink": "products.html",
+      "image": "images/a_lot_of_phones.jpg",
+      "imageAlt": "Many Phones Slide",
+      "backgroundColor": "#0f766e",
+      "layout": "right"
+    },
+    {
+      "id": 7,
+      "title": "AirPods Pro",
+      "description": "Silence the noise. Hear every detail. Next-level listening.",
+      "buttonText": "Get Yours",
+      "buttonLink": "products.html",
+      "image": "images/airpods_pro.jpg",
+      "imageAlt": "AirPods Pro Slide",
+      "backgroundColor": "#d97706",
+      "layout": "left"
+    },
+    {
+      "id": 8,
+      "title": "Original AirPods",
+      "description": "Simple. Iconic. Wire-free freedom at its finest.",
+      "buttonText": "Shop Now",
+      "buttonLink": "products.html",
+      "image": "images/airpods.jpg",
+      "imageAlt": "AirPods Slide",
+      "backgroundColor": "#db2777",
+      "layout": "right"
+    },
+    {
+      "id": 9,
+      "title": "Apple Headphones",
+      "description": "Experience every detail in stunning clarity. Designed for true audiophiles.",
+      "buttonText": "Feel the Sound",
+      "buttonLink": "products.html",
+      "image": "images/apple_headphones.jpg",
+      "imageAlt": "Apple Headphones",
+      "backgroundColor": "#7f1d1d",
+      "layout": "left"
+    },
+    {
+      "id": 10,
+      "title": "Smart Watches",
+      "description": "Style meets function. Your life, at a glance — on your wrist.",
+      "buttonText": "Explore Watches",
+      "buttonLink": "products.html",
+      "image": "images/smart_watches.jpg",
+      "imageAlt": "Smart Watches",
+      "backgroundColor": "#4b5563",
+      "layout": "right"
+    },
+    {
+      "id": 11,
+      "title": "Printing Services",
+      "description": "High-quality prints for all your professional and personal needs.",
+      "buttonText": "Print with Us",
+      "buttonLink": "products.html",
+      "image": "images/printing.jpg",
+      "imageAlt": "Printing",
+      "backgroundColor": "#065f46",
+      "layout": "left"
+    },
+    {
+      "id": 12,
+      "title": "Perfect Binding",
+      "description": "Neat, professional binding for documents that make a statement.",
+      "buttonText": "Get Bound",
+      "buttonLink": "products.html",
+      "image": "images/binding.jpg",
+      "imageAlt": "Binding",
+      "backgroundColor": "#78350f",
+      "layout": "right"
+    },
+    {
+      "id": 13,
+      "title": "Laminating",
+      "description": "Protect and enhance your documents with a sleek, glossy finish.",
+      "buttonText": "Laminate Now",
+      "buttonLink": "products.html",
+      "image": "images/laminating.jpg",
+      "imageAlt": "Laminating",
+      "backgroundColor": "#92400e",
+      "layout": "left"
+    },
+    {
+      "id": 14,
+      "title": "Omari Agent Services",
+      "description": "Send and receive money with confidence — fast, safe, and easy.",
+      "buttonText": "Visit Us",
+      "buttonLink": "products.html",
+      "image": "images/omari.png",
+      "imageAlt": "Omari",
+      "backgroundColor": "#b91c1c",
+      "layout": "right"
+    },
+    {
+      "id": 15,
+      "title": "Visa Application Assistance",
+      "description": "Travel dreams made easy. We help you every step of the way.",
+      "buttonText": "Start Process",
+      "buttonLink": "products.html",
+      "image": "images/visa1.jpg",
+      "imageAlt": "Visa Services",
+      "backgroundColor": "#1d4ed8",
+      "layout": "left"
+    },
+    {
+      "id": 16,
+      "title": "Ecocash Agent",
+      "description": "Instant cash-in, cash-out, bill payments, and more at your convenience.",
+      "buttonText": "Transact Now",
+      "buttonLink": "products.html",
+      "image": "images/ecocash.png",
+      "imageAlt": "Ecocash",
+      "backgroundColor": "#15803d",
+      "layout": "right"
+    }
+  ];
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ One-Click Updater loaded successfully (No server required!)');
+            console.log('📊 Current data loaded:', {
+                'Site Config': siteConfig.company.name,
+                'Products': products.length,
+                'Carousel Slides': carouselSlides.length
+            });
+            
+            // Expose data globally for main website integration
+            window.embeddedSiteConfig = siteConfig;
+            window.embeddedCarouselSlides = carouselSlides;
+            window.embeddedProducts = products;
+            
+            // Save to localStorage for cross-page sharing
+            saveToLocalStorage();
+        });
+
+        // Save data to localStorage
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem('wanaTrading_siteConfig', JSON.stringify(siteConfig));
+                localStorage.setItem('wanaTrading_carouselSlides', JSON.stringify(carouselSlides));
+                localStorage.setItem('wanaTrading_products', JSON.stringify(products));
+                console.log('💾 Data saved to localStorage for cross-page sharing');
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+            }
+        }
+
+        // Quick update functions
+        function quickUpdate(type) {
+            switch(type) {
+                case 'phone':
+                    showPhoneForm();
+                    break;
+                case 'email':
+                    showEmailForm();
+                    break;
+                case 'address':
+                    showAddressForm();
+                    break;
+                case 'product':
+                    showProductForm();
+                    break;
+            }
+        }
+
+        // Show/hide form functions
+        function showPhoneForm() {
+            document.querySelector('.phone-form').style.display = 'block';
+            document.getElementById('newPhone1').value = siteConfig.contact?.phones[0] || '';
+            document.getElementById('newPhone2').value = siteConfig.contact?.phones[1] || '';
+        }
+
+        function showEmailForm() {
+            document.querySelector('.email-form').style.display = 'block';
+            document.getElementById('newEmail').value = siteConfig.contact?.email || '';
+        }
+
+        function showAddressForm() {
+            document.querySelector('.address-form').style.display = 'block';
+            document.getElementById('newAddress').value = siteConfig.contact?.address || '';
+        }
+
+        function showProductForm() {
+            document.querySelector('.product-form').style.display = 'block';
+        }
+
+        function showSlideForm() {
+            document.querySelector('.slide-form').style.display = 'block';
+        }
+
+        // Update functions
+        function updatePhone() {
+            const phone1 = document.getElementById('newPhone1').value;
+            const phone2 = document.getElementById('newPhone2').value;
+            
+            if (!phone1.trim()) {
+                showNotification('Please enter at least one phone number.', 'error');
+                return;
+            }
+
+            siteConfig.contact.phones = [phone1, phone2].filter(phone => phone.trim());
+            saveToLocalStorage();
+            showSuccess('Phone numbers updated successfully!');
+            hideForm('.phone-form');
+        }
+
+        function updateEmail() {
+            const email = document.getElementById('newEmail').value;
+            
+            if (!email.trim()) {
+                showNotification('Please enter an email address.', 'error');
+                return;
+            }
+
+            siteConfig.contact.email = email;
+            saveToLocalStorage();
+            showSuccess('Email address updated successfully!');
+            hideForm('.email-form');
+        }
+
+        function updateAddress() {
+            const address = document.getElementById('newAddress').value;
+            
+            if (!address.trim()) {
+                showNotification('Please enter an address.', 'error');
+                return;
+            }
+
+            siteConfig.contact.address = address;
+            saveToLocalStorage();
+            showSuccess('Address updated successfully!');
+            hideForm('.address-form');
+        }
+
+        function addProduct() {
+            const name = document.getElementById('productName').value;
+            const category = document.getElementById('productCategory').value;
+            const description = document.getElementById('productDescription').value;
+            
+            if (!name.trim() || !category.trim() || !description.trim()) {
+                showNotification('Please fill in all product fields.', 'error');
+                return;
+            }
+
+            const newProduct = {
+                id: products.length + 1,
+                title: name,
+                description: description,
+                image: 'images/placeholder.jpg',
+                imageAlt: name,
+                category: category,
+                badgeColor: 'primary',
+                badgeGradient: 'linear-gradient(135deg, #667eea, #764ba2)'
+            };
+
+            products.push(newProduct);
+            saveToLocalStorage();
+            showSuccess('Product added successfully!');
+            hideForm('.product-form');
+            document.getElementById('productName').value = '';
+            document.getElementById('productCategory').value = '';
+            document.getElementById('productDescription').value = '';
+        }
+
+        function addSlide() {
+            const title = document.getElementById('slideTitle').value;
+            const description = document.getElementById('slideDescription').value;
+            const image = document.getElementById('slideImage').value;
+            
+            if (!title.trim() || !description.trim() || !image.trim()) {
+                showNotification('Please fill in all slide fields.', 'error');
+                return;
+            }
+
+            const newSlide = {
+                id: carouselSlides.length + 1,
+                title: title,
+                description: description,
+                buttonText: 'Learn More',
+                buttonLink: 'products.html',
+                image: image,
+                imageAlt: title,
+                backgroundColor: '#111827',
+                layout: 'left'
+            };
+
+            carouselSlides.push(newSlide);
+            saveToLocalStorage();
+            showSuccess('Slide added successfully!');
+            hideForm('.slide-form');
+            document.getElementById('slideTitle').value = '';
+            document.getElementById('slideDescription').value = '';
+            document.getElementById('slideImage').value = '';
+        }
+
+        // Helper functions
+        function hideForm(selector) {
+            document.querySelector(selector).style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            showNotification(message, 'success');
+            // Add success animation to the card
+            const card = event.target.closest('.card');
+            if (card) {
+                card.classList.add('success-animation');
+                setTimeout(() => card.classList.remove('success-animation'), 600);
+            }
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'success' ? 'success' : 'danger'} position-fixed`;
+            notification.style.cssText = `
+                top: 20px;
+                right: 20px;
+                z-index: 10000;
+                min-width: 300px;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            `;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>
+                ${message}
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Download functions
+        function downloadFile(filename) {
+            let data, contentType;
+            
+            switch(filename) {
+                case 'site-config.json':
+                    data = siteConfig;
+                    break;
+                case 'products.json':
+                    data = { products: products };
+                    break;
+                case 'carousel-slides.json':
+                    data = { slides: carouselSlides };
+                    break;
+            }
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            showNotification(`${filename} downloaded successfully!`, 'success');
+        }
+
+        function downloadAll() {
+            downloadFile('site-config.json');
+            setTimeout(() => downloadFile('products.json'), 500);
+            setTimeout(() => downloadFile('carousel-slides.json'), 1000);
+        }
+
+        function showHelp() {
+            alert(`🎯 One-Click Updates Help (No Server Required!)
+
+📱 Quick Actions:
+• Change Phone - Update your business phone numbers
+• Change Email - Update your business email address
+• Change Address - Update your business location
+• Add Product - Add a new product to your catalog
+
+💾 After making changes:
+1. Click the download buttons to get updated JSON files
+2. Replace the files in your data/ folder
+3. Refresh your website to see changes
+
+🔄 Need more options? Use the Full Admin Panel for advanced editing.
+
+💡 Tip: This version works without any server! Just open the HTML file directly in your browser.
+
+✅ No more "Error loading data" messages!`);
+        }
+    </script>
+</body>
+</html> 
