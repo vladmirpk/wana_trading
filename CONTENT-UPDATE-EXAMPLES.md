@@ -212,9 +212,11 @@ You have 15 products, want to add a 16th
 1. **Open:** `http://localhost:8000/one-click-updater.html`
 2. **Click "Add"** next to products
 3. **Fill in the form:**
+
    - Product Name: `Wireless Gaming Mouse`
    - Category: `Gaming`
    - Description: `High-precision wireless gaming mouse with RGB lighting`
+
 4. **Click "Add Product"**
 5. **Download** the `products.json` file
 6. **Upload** to your server
