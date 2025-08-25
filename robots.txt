@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://wanatrading.co.zw/sitemap.xml
+
+# Allow all crawlers
+Disallow: /admin.html
+Disallow: /debug-content.html
+Disallow: /test-*.html
+Disallow: /one-click-updater.html
+Disallow: /auto-updater.js
+Disallow: /.git/
+Disallow: /README.md
+Disallow: /*.md
+
+# Allow important pages
+Allow: /index.html
+Allow: /about.html
+Allow: /products.html
+Allow: /services.html
+Allow: /contact.html
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /data/
